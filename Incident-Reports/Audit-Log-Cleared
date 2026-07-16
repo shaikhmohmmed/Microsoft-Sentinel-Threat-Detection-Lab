@@ -1,1 +1,81 @@
+# Incident Report: Windows Security Log Cleared
 
+## Incident Summary
+
+The Windows Security event log was cleared on the monitored endpoint. Clearing audit logs is commonly associated with defense evasion techniques used to remove forensic evidence.
+
+---
+
+## Incident Information
+
+| Field | Value |
+|--------|-------|
+| Incident Name | Audit Log Cleared |
+| Severity | High |
+| Event ID | 1102 |
+| Detection Source | Microsoft Sentinel |
+| Data Source | Windows Security Logs |
+| Affected Machine | SOC-WIN10-01 |
+| Status | Investigated |
+
+---
+
+## Detection Logic
+
+The analytics rule monitors Windows Security Event ID **1102**, which is generated whenever the Windows Security log is cleared.
+
+---
+
+## Timeline
+
+| Time | Activity |
+|------|----------|
+| T0 | Security log cleared |
+| T1 | Event ID 1102 generated |
+| T2 | Azure Monitor Agent collected the event |
+| T3 | Microsoft Sentinel detected the activity |
+| T4 | Investigation initiated |
+
+---
+
+## Evidence Collected
+
+- Event ID 1102
+- User responsible for clearing the log
+- Timestamp
+- Computer name
+
+---
+
+## Investigation
+
+The Security log was intentionally cleared during lab testing to validate the analytics rule. In a production environment, this activity would be treated as a high-priority incident requiring immediate investigation.
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Defense Evasion | Clear Windows Event Logs | T1070.001 |
+
+---
+
+## Impact Assessment
+
+Clearing Windows Security logs can remove evidence of malicious activity and hinder forensic investigations.
+
+---
+
+## Recommended Response
+
+- Preserve all remaining logs.
+- Review administrator activity before the log was cleared.
+- Investigate process creation and authentication events preceding the action.
+- Escalate to the incident response team if the action was unauthorized.
+
+---
+
+## Lessons Learned
+
+Windows Security log clearing is a high-severity event that should always be investigated because attackers commonly use it to conceal malicious actions.
