@@ -1,1 +1,81 @@
+# Incident Report: Administrator Group Modification
 
+## Incident Summary
+
+A user account was added to the local Administrators group. Changes to privileged groups are high-risk events and should always be reviewed.
+
+---
+
+## Incident Information
+
+| Field | Value |
+|--------|-------|
+| Incident Name | Administrator Group Modification |
+| Severity | High |
+| Event ID | 4732 |
+| Detection Source | Microsoft Sentinel |
+| Data Source | Windows Security Logs |
+| Affected Machine | SOC-WIN10-01 |
+| Status | Investigated |
+
+---
+
+## Detection Logic
+
+The analytics rule monitors Windows Security Event ID **4732**, which records when a user is added to a security-enabled local group.
+
+---
+
+## Timeline
+
+| Time | Activity |
+|------|----------|
+| T0 | User added to Administrators group |
+| T1 | Event ID 4732 generated |
+| T2 | Event collected by Azure Monitor Agent |
+| T3 | Microsoft Sentinel generated an alert |
+| T4 | Investigation performed |
+
+---
+
+## Evidence Collected
+
+- Modified group
+- Added account
+- Administrator performing the change
+- Timestamp
+
+---
+
+## Investigation
+
+The administrator group modification was intentionally performed for lab validation. In a production environment, unauthorized privilege escalation should be investigated immediately.
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Privilege Escalation | Account Manipulation | T1098 |
+
+---
+
+## Impact Assessment
+
+Unauthorized administrator privileges may allow attackers to execute privileged commands, disable security controls, and establish persistence.
+
+---
+
+## Recommended Response
+
+- Verify authorization for the group modification.
+- Remove unauthorized members.
+- Audit privileged account activity.
+- Monitor subsequent administrative actions.
+
+---
+
+## Lessons Learned
+
+Monitoring privileged group modifications helps detect privilege escalation before attackers gain full administrative control.
