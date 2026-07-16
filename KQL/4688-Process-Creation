@@ -1,1 +1,66 @@
+# Event ID 4688 - Process Creation
 
+## Description
+
+Event ID **4688** records every new process created on a Windows system. This event helps analysts monitor executed applications and identify malicious or suspicious process activity.
+
+---
+
+## Event ID
+
+**4688**
+
+---
+
+## Purpose
+
+- Monitor executed processes.
+- Detect malicious software execution.
+- Identify PowerShell, CMD, or scripting activity.
+- Support forensic investigations.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4688
+| project TimeGenerated, Computer, RenderedDescription
+| sort by TimeGenerated desc
+```
+
+---
+
+## Sample Output
+
+- Time Generated: 2026-07-16 04:42 UTC
+- Computer: SOC-WIN10-01
+- Description:
+  - New Process Name:
+    C:\Windows\System32\lsass.exe
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Execution | Command and Scripting Interpreter | T1059 |
+
+---
+
+## Investigation Steps
+
+1. Identify the new process.
+2. Review the parent process.
+3. Check the command line.
+4. Verify the executable path.
+5. Look for suspicious child processes.
+6. Determine whether the execution was expected.
+
+---
+
+## Conclusion
+
+Process creation events provide visibility into program execution and help identify malware, scripts, and attacker tools.
