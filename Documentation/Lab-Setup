@@ -1,1 +1,118 @@
+# Microsoft Sentinel Threat Detection Lab Setup
 
+## Project Overview
+
+This lab demonstrates the deployment of a cloud-based Security Operations Center (SOC) using Microsoft Sentinel and Microsoft Azure services. The objective was to simulate real-world security monitoring by collecting Windows Security Events, writing Kusto Query Language (KQL) queries, creating Microsoft Sentinel analytics rules, and investigating security incidents.
+
+---
+
+# Lab Objectives
+
+- Deploy Microsoft Sentinel.
+- Connect a Windows endpoint using Azure Arc.
+- Install Azure Monitor Agent (AMA).
+- Configure Data Collection Rules (DCR).
+- Collect Windows Security Events.
+- Create KQL detection queries.
+- Develop Microsoft Sentinel Analytics Rules.
+- Perform Threat Hunting.
+- Generate and investigate security incidents.
+- Document findings using MITRE ATT&CK.
+
+---
+
+# Lab Environment
+
+| Component | Technology |
+|-----------|------------|
+| Cloud Platform | Microsoft Azure |
+| SIEM | Microsoft Sentinel |
+| Monitoring | Azure Monitor |
+| Endpoint Management | Azure Arc |
+| Log Storage | Log Analytics Workspace |
+| Data Collection | Azure Monitor Agent (AMA) |
+| Operating System | Windows 10 |
+| Virtualization | VirtualBox |
+| Query Language | Kusto Query Language (KQL) |
+
+---
+
+# Azure Resources Created
+
+- Resource Group
+- Log Analytics Workspace
+- Microsoft Sentinel
+- Azure Arc Connected Machine
+- Azure Monitor Agent
+- Data Collection Rule (DCR)
+
+---
+
+# Data Flow
+
+Windows 10 VM
+
+↓
+
+Azure Arc
+
+↓
+
+Azure Monitor Agent
+
+↓
+
+Data Collection Rule
+
+↓
+
+Log Analytics Workspace
+
+↓
+
+Microsoft Sentinel
+
+---
+
+# Windows Security Events Collected
+
+| Event ID | Description |
+|-----------|-------------|
+| 4624 | Successful Logon |
+| 4625 | Failed Logon |
+| 4688 | Process Creation |
+| 4720 | User Account Created |
+| 4732 | User Added to Administrators Group |
+| 1102 | Audit Log Cleared |
+
+---
+
+# Analytics Rules Created
+
+- Brute Force Login Detection
+- New Local User Detection
+- Process Creation Monitoring
+- Administrator Group Modification
+- Audit Log Cleared Detection
+
+---
+
+# Skills Demonstrated
+
+- Microsoft Sentinel Administration
+- Azure Arc
+- Azure Monitor
+- Log Analytics Workspace
+- Azure Monitor Agent
+- Windows Security Event Monitoring
+- Kusto Query Language (KQL)
+- Threat Hunting
+- Detection Engineering
+- Incident Investigation
+- MITRE ATT&CK Mapping
+
+---
+
+# Project Outcome
+
+Successfully deployed an end-to-end Microsoft Sentinel SOC lab capable of collecting Windows Security Events, detecting suspicious activity through analytics rules, and performing incident investigations using KQL and Microsoft Sentinel.
