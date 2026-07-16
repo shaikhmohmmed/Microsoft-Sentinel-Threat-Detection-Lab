@@ -1,1 +1,92 @@
+# Brute Force Login Detection
 
+## Objective
+
+Detect multiple failed login attempts that may indicate a brute-force attack against a Windows endpoint.
+
+---
+
+## Overview
+
+This Microsoft Sentinel analytics rule monitors Windows Security Event ID **4625** (Failed Logon). If five or more failed authentication attempts occur within a five-minute period, the rule generates an alert for investigation.
+
+---
+
+## Severity
+
+Medium
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Credential Access | Brute Force | T1110 |
+
+---
+
+## Data Source
+
+- Windows Security Event Logs
+- Azure Monitor Agent (AMA)
+- Azure Arc
+- Log Analytics Workspace
+
+---
+
+## Detection Logic
+
+The analytics rule counts failed logon events grouped by computer over a rolling five-minute window. If the failed attempt count reaches five or more, Microsoft Sentinel creates an alert.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4625
+| summarize FailedAttempts=count() by Computer, bin(TimeGenerated,5m)
+| where FailedAttempts >= 5
+```
+
+---
+
+## Test Performed
+
+- Entered an incorrect password multiple times on the Windows VM.
+- Generated several Event ID 4625 events.
+- Verified the events in Log Analytics.
+- Confirmed the analytics rule detected the activity.
+
+---
+
+## Expected Alert
+
+Brute Force Login Detection
+
+---
+
+## Investigation Steps
+
+1. Identify the target account.
+2. Review the failed login count.
+3. Determine the logon type.
+4. Check for a successful logon after repeated failures.
+5. Investigate the source system.
+6. Reset or disable the account if necessary.
+
+---
+
+## Recommended Response
+
+- Block the attacking source if applicable.
+- Reset the affected user's password.
+- Enable Multi-Factor Authentication (MFA).
+- Monitor for additional suspicious authentication activity.
+
+---
+
+## Lessons Learned
+
+Repeated failed authentication attempts are a common indicator of password guessing and brute-force attacks. Monitoring Event ID 4625 helps detect credential-based attacks at an early stage.
