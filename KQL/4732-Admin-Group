@@ -1,1 +1,64 @@
+# Event ID 4732 - User Added to Security-Enabled Local Group
 
+## Description
+
+Event ID **4732** is generated whenever a user is added to a local security group, such as the Administrators group.
+
+---
+
+## Event ID
+
+**4732**
+
+---
+
+## Purpose
+
+- Monitor privilege escalation.
+- Detect administrator group modifications.
+- Identify unauthorized privilege assignments.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4732
+| project TimeGenerated, Computer, RenderedDescription
+| sort by TimeGenerated desc
+```
+
+---
+
+## Sample Output
+
+- Time Generated: 2026-07-16
+- Computer: SOC-WIN10-01
+- Description:
+  - Member added to Administrators group.
+  - User: hacker
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Privilege Escalation | Account Manipulation | T1098 |
+
+---
+
+## Investigation Steps
+
+1. Identify the modified group.
+2. Determine which account was added.
+3. Verify who performed the action.
+4. Confirm whether the change was authorized.
+5. Review related authentication events.
+
+---
+
+## Conclusion
+
+Unexpected administrator group changes may indicate privilege escalation or unauthorized administrative access.
