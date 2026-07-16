@@ -1,1 +1,64 @@
+# Event ID 1102 - Audit Log Cleared
 
+## Description
+
+Event ID **1102** is generated whenever the Windows Security event log is cleared.
+
+---
+
+## Event ID
+
+**1102**
+
+---
+
+## Purpose
+
+- Detect attempts to erase evidence.
+- Identify defense evasion activities.
+- Monitor suspicious administrative actions.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 1102
+| project TimeGenerated, Computer, RenderedDescription
+| sort by TimeGenerated desc
+```
+
+---
+
+## Sample Output
+
+- Time Generated: 2026-07-16
+- Computer: SOC-WIN10-01
+- Description:
+  - The audit log was cleared.
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Defense Evasion | Clear Windows Event Logs | T1070.001 |
+
+---
+
+## Investigation Steps
+
+1. Identify who cleared the logs.
+2. Determine when the logs were cleared.
+3. Review preceding events.
+4. Check for privilege escalation activity.
+5. Investigate related process creation events (4688).
+6. Escalate immediately if the action was unauthorized.
+
+---
+
+## Conclusion
+
+Clearing Windows Security logs is a high-risk action that often indicates an attempt to hide malicious activity and should be investigated immediately.
