@@ -1,1 +1,93 @@
+# Administrator Group Modification Detection
 
+## Objective
+
+Detect when a user account is added to the local Administrators group.
+
+---
+
+## Overview
+
+This analytics rule monitors Windows Security Event ID **4732**, which records changes to local security-enabled groups.
+
+---
+
+## Severity
+
+High
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Privilege Escalation | Account Manipulation | T1098 |
+
+---
+
+## Data Source
+
+- Windows Security Event Logs
+- Azure Monitor Agent
+- Azure Arc
+- Log Analytics Workspace
+
+---
+
+## Detection Logic
+
+Whenever a user is added to the Administrators group, Event ID 4732 is generated and Microsoft Sentinel creates an alert.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4732
+| project TimeGenerated, Computer, RenderedDescription
+```
+
+---
+
+## Test Performed
+
+Executed:
+
+```cmd
+net localgroup Administrators hacker /add
+```
+
+Verified Event ID 4732 in Log Analytics.
+
+---
+
+## Expected Alert
+
+User Added to Administrators Group
+
+---
+
+## Investigation Steps
+
+1. Identify the modified group.
+2. Determine which user was added.
+3. Verify who performed the action.
+4. Confirm change approval.
+5. Investigate additional privilege escalation activity.
+
+---
+
+## Recommended Response
+
+- Remove unauthorized accounts.
+- Review administrative actions.
+- Reset privileged credentials if necessary.
+- Investigate possible compromise.
+
+---
+
+## Lessons Learned
+
+Unexpected administrator group modifications are high-risk events that may indicate privilege escalation by an attacker.
