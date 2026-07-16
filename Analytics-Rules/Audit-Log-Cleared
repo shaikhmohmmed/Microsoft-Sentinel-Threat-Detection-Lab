@@ -1,1 +1,89 @@
+# Audit Log Cleared Detection
 
+## Objective
+
+Detect attempts to clear Windows Security event logs.
+
+---
+
+## Overview
+
+This analytics rule monitors Windows Security Event ID **1102**, which is generated whenever the Windows Security log is cleared.
+
+---
+
+## Severity
+
+High
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Defense Evasion | Clear Windows Event Logs | T1070.001 |
+
+---
+
+## Data Source
+
+- Windows Security Event Logs
+- Azure Monitor Agent
+- Azure Arc
+- Log Analytics Workspace
+
+---
+
+## Detection Logic
+
+Whenever the Windows Security log is cleared, Event ID 1102 is generated and Microsoft Sentinel raises an alert.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 1102
+| project TimeGenerated, Computer, RenderedDescription
+```
+
+---
+
+## Test Performed
+
+Cleared the Windows Security event log using Event Viewer.
+
+Verified Event ID 1102 was collected in Log Analytics Workspace.
+
+---
+
+## Expected Alert
+
+Audit Log Cleared
+
+---
+
+## Investigation Steps
+
+1. Identify who cleared the log.
+2. Determine when the action occurred.
+3. Review preceding security events.
+4. Investigate possible privilege escalation.
+5. Escalate immediately if unauthorized.
+
+---
+
+## Recommended Response
+
+- Preserve available logs.
+- Investigate the responsible account.
+- Review endpoint activity.
+- Isolate affected systems if compromise is suspected.
+
+---
+
+## Lessons Learned
+
+Clearing Windows Security logs is a common defense evasion technique used by attackers attempting to hide malicious activity. This event should always be treated as high priority.
