@@ -1,1 +1,62 @@
+# Threat Hunt: Process Creation (Event ID 4688)
 
+## Hunt Objective
+
+Identify suspicious process execution that could indicate malware, scripts, or attacker activity.
+
+---
+
+## Threat Hypothesis
+
+An attacker executed unauthorized processes such as PowerShell, CMD, or malicious binaries.
+
+---
+
+## Data Source
+
+- Windows Security Logs
+- Microsoft Sentinel
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4688
+| project TimeGenerated, Computer, RenderedDescription
+| sort by TimeGenerated desc
+```
+
+---
+
+## Investigation Steps
+
+1. Identify the executable.
+2. Review the parent process.
+3. Examine the command line.
+4. Verify execution path.
+5. Investigate unusual executables.
+6. Correlate with authentication events.
+
+---
+
+## Expected Findings
+
+- Executed applications
+- Parent-child process relationships
+- Suspicious command execution
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Execution | Command and Scripting Interpreter | T1059 |
+
+---
+
+## Conclusion
+
+Process creation events provide visibility into endpoint activity and help detect malicious execution.
