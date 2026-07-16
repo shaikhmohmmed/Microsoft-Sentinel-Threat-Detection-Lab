@@ -1,1 +1,83 @@
+# Incident Report: Unauthorized Local User Creation
 
+## Incident Summary
+
+A new local Windows user account was created on the monitored endpoint. User account creation is a persistence technique commonly used by attackers after initial compromise.
+
+---
+
+## Incident Information
+
+| Field | Value |
+|--------|-------|
+| Incident Name | New Local User Detection |
+| Severity | Medium |
+| Event ID | 4720 |
+| Detection Source | Microsoft Sentinel |
+| Data Source | Windows Security Logs |
+| Affected Machine | SOC-WIN10-01 |
+| Status | Investigated |
+
+---
+
+## Detection Logic
+
+The analytics rule monitors Windows Security Event ID **4720**, which is generated whenever a new local user account is created.
+
+---
+
+## Timeline
+
+| Time | Activity |
+|------|----------|
+| T0 | Local user account created |
+| T1 | Event ID 4720 generated |
+| T2 | Azure Monitor Agent collected the event |
+| T3 | Microsoft Sentinel detected the activity |
+| T4 | Investigation initiated |
+
+---
+
+## Evidence Collected
+
+- Event ID 4720
+- Username created
+- Computer name
+- User creation timestamp
+
+---
+
+## Investigation
+
+The newly created account was verified against expected administrative activity. During lab testing, the account creation was intentionally performed to validate the detection rule.
+
+In a production environment, unauthorized account creation should be treated as a potential persistence mechanism.
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Persistence | Create Account | T1136 |
+
+---
+
+## Impact Assessment
+
+Unauthorized user accounts can provide attackers with persistent access to the system.
+
+---
+
+## Recommended Response
+
+- Disable unauthorized accounts.
+- Review administrator activity.
+- Investigate related authentication events.
+- Reset compromised credentials if necessary.
+
+---
+
+## Lessons Learned
+
+Monitoring account creation events allows SOC analysts to detect persistence techniques before attackers establish long-term access.
