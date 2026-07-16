@@ -1,1 +1,60 @@
+# Threat Hunt: New User Account Created (Event ID 4720)
 
+## Hunt Objective
+
+Detect newly created local user accounts that may indicate persistence.
+
+---
+
+## Threat Hypothesis
+
+An attacker created a local account to maintain access to the compromised system.
+
+---
+
+## Data Source
+
+- Windows Security Logs
+- Microsoft Sentinel
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4720
+| project TimeGenerated, Computer, RenderedDescription
+```
+
+---
+
+## Investigation Steps
+
+1. Identify the created account.
+2. Determine who created it.
+3. Verify whether the action was authorized.
+4. Check if the account joined privileged groups.
+5. Review subsequent logon events.
+
+---
+
+## Expected Findings
+
+- Newly created accounts
+- Administrator-created accounts
+- Unauthorized persistence
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Persistence | Create Account | T1136 |
+
+---
+
+## Conclusion
+
+Unexpected account creation is a common persistence technique and should always be validated.
