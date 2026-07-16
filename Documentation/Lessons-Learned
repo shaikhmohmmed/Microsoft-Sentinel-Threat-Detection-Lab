@@ -1,1 +1,118 @@
+# Lessons Learned
 
+## Project Summary
+
+This project provided practical experience in building and operating a cloud-based Security Operations Center (SOC) using Microsoft Sentinel and Azure services. It strengthened my understanding of SIEM technologies, Windows Security Events, Kusto Query Language (KQL), and incident investigation workflows.
+
+---
+
+# Technical Skills Gained
+
+## Microsoft Sentinel
+
+- Created and managed Analytics Rules.
+- Investigated Windows Security Events.
+- Performed Threat Hunting using KQL.
+- Monitored endpoint activity.
+
+---
+
+## Azure Services
+
+- Azure Arc
+- Azure Monitor
+- Azure Monitor Agent
+- Data Collection Rules
+- Log Analytics Workspace
+
+---
+
+## Windows Security Monitoring
+
+Investigated several critical Windows Security Events including:
+
+- Event ID 4624 – Successful Logon
+- Event ID 4625 – Failed Logon
+- Event ID 4688 – Process Creation
+- Event ID 4720 – User Account Created
+- Event ID 4732 – User Added to Administrators Group
+- Event ID 1102 – Audit Log Cleared
+
+---
+
+## Detection Engineering
+
+Developed Microsoft Sentinel Analytics Rules for:
+
+- Brute Force Detection
+- New User Detection
+- Administrator Group Changes
+- Process Creation Monitoring
+- Audit Log Clearing
+
+---
+
+## Threat Hunting
+
+Developed KQL queries to investigate:
+
+- Authentication events
+- Process execution
+- User account activity
+- Privilege escalation
+- Defense evasion
+
+---
+
+## Incident Response
+
+Created structured incident reports containing:
+
+- Detection Summary
+- Timeline
+- Investigation
+- Evidence
+- MITRE ATT&CK Mapping
+- Recommendations
+
+---
+
+# Challenges Faced
+
+- Configuring Azure Arc connectivity.
+- Setting up Azure Monitor Agent.
+- Creating Data Collection Rules.
+- Understanding Windows Security Event IDs.
+- Writing effective KQL queries.
+- Mapping detections to MITRE ATT&CK.
+
+---
+
+# Key Takeaways
+
+- Microsoft Sentinel provides centralized security monitoring.
+- Windows Event Logs are essential for threat detection.
+- KQL is a powerful language for threat hunting.
+- Analytics Rules automate detection of suspicious activities.
+- Documentation is as important as technical implementation.
+- Mapping detections to MITRE ATT&CK improves investigation quality.
+
+---
+
+# Future Improvements
+
+Future enhancements to this project may include:
+
+- Sysmon integration
+- Microsoft Defender for Endpoint integration
+- Custom Analytics Rules
+- Sentinel Workbooks and Dashboards
+- Automation Rules
+- Logic Apps for automated incident response
+- Email notifications for high-severity incidents
+
+---
+
+# Final Outcome
+
+Successfully built a Microsoft Sentinel Threat Detection & Incident Response Lab capable of collecting Windows Security Events, detecting suspicious activity, investigating incidents, and documenting findings using industry-standard frameworks and best practices.
