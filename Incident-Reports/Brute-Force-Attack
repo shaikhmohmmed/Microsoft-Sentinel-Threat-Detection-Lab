@@ -1,1 +1,85 @@
+# Incident Report: Brute Force Login Attack
 
+## Incident Summary
+
+Multiple failed Windows authentication attempts were detected on the monitored endpoint. The activity exceeded the configured detection threshold and triggered a Microsoft Sentinel analytics rule for potential brute-force activity.
+
+---
+
+## Incident Information
+
+| Field | Value |
+|--------|-------|
+| Incident Name | Brute Force Login Detection |
+| Severity | Medium |
+| Event ID | 4625 |
+| Detection Source | Microsoft Sentinel |
+| Data Source | Windows Security Logs |
+| Affected Machine | SOC-WIN10-01 |
+| Status | Investigated |
+
+---
+
+## Detection Logic
+
+The analytics rule monitors Windows Security Event ID **4625**. If five or more failed authentication attempts occur within a five-minute window, Microsoft Sentinel generates an alert.
+
+---
+
+## Timeline
+
+| Time | Activity |
+|------|----------|
+| T0 | Multiple failed login attempts generated |
+| T1 | Event ID 4625 collected by Azure Monitor Agent |
+| T2 | Events forwarded to Log Analytics Workspace |
+| T3 | Microsoft Sentinel Analytics Rule executed |
+| T4 | Alert generated for investigation |
+
+---
+
+## Evidence Collected
+
+- Windows Security Event ID 4625
+- Username involved
+- Failure reason
+- Logon type
+- Source workstation
+- Authentication package
+
+---
+
+## Investigation
+
+The investigation confirmed repeated authentication failures using invalid credentials. No successful login was observed immediately after the failed attempts.
+
+No evidence of privilege escalation or persistence techniques was identified during the investigation.
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Credential Access | Brute Force | T1110 |
+
+---
+
+## Impact Assessment
+
+No unauthorized access was observed. However, repeated authentication failures may indicate password guessing or credential-based attacks.
+
+---
+
+## Recommended Response
+
+- Investigate the source of the authentication attempts.
+- Reset passwords if compromise is suspected.
+- Enable Multi-Factor Authentication (MFA).
+- Monitor the account for additional authentication attempts.
+
+---
+
+## Lessons Learned
+
+Repeated failed authentication attempts are one of the earliest indicators of brute-force attacks. Monitoring Event ID 4625 enables early detection and response.
