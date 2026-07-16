@@ -1,1 +1,61 @@
+# Threat Hunt: Audit Log Cleared (Event ID 1102)
 
+## Hunt Objective
+
+Detect attempts to erase Windows Security logs.
+
+---
+
+## Threat Hypothesis
+
+An attacker cleared the Security event logs to hide malicious activity.
+
+---
+
+## Data Source
+
+- Windows Security Logs
+- Microsoft Sentinel
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 1102
+| project TimeGenerated, Computer, RenderedDescription
+```
+
+---
+
+## Investigation Steps
+
+1. Identify who cleared the logs.
+2. Determine when the action occurred.
+3. Review previous authentication events.
+4. Review process creation events.
+5. Investigate privilege escalation activity.
+6. Determine whether the action was authorized.
+
+---
+
+## Expected Findings
+
+- Cleared audit logs
+- Suspicious administrator activity
+- Evidence of defense evasion
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Defense Evasion | Clear Windows Event Logs | T1070.001 |
+
+---
+
+## Conclusion
+
+Clearing Windows Security logs is a high-severity event that often indicates an attempt to remove forensic evidence after malicious activity.
