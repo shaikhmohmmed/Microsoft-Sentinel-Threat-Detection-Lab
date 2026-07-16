@@ -1,1 +1,93 @@
+# New Local User Detection
 
+## Objective
+
+Detect the creation of new local user accounts on Windows systems.
+
+---
+
+## Overview
+
+This analytics rule monitors Windows Security Event ID **4720**, which is generated whenever a new local user account is created.
+
+---
+
+## Severity
+
+Medium
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Persistence | Create Account | T1136 |
+
+---
+
+## Data Source
+
+- Windows Security Event Logs
+- Azure Monitor Agent
+- Azure Arc
+- Log Analytics Workspace
+
+---
+
+## Detection Logic
+
+Whenever a new local user account is created, Event ID 4720 is logged and Microsoft Sentinel generates an alert.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4720
+| project TimeGenerated, Computer, RenderedDescription
+```
+
+---
+
+## Test Performed
+
+Created a local Windows account using:
+
+```cmd
+net user hacker Password@123 /add
+```
+
+Verified Event ID 4720 in Log Analytics Workspace.
+
+---
+
+## Expected Alert
+
+New Local User Created
+
+---
+
+## Investigation Steps
+
+1. Identify the new account.
+2. Determine who created it.
+3. Verify whether the account creation was authorized.
+4. Check if the account was later added to privileged groups.
+5. Review authentication events associated with the new account.
+
+---
+
+## Recommended Response
+
+- Disable unauthorized accounts.
+- Reset credentials if compromise is suspected.
+- Review administrator activity.
+- Investigate the timeline surrounding account creation.
+
+---
+
+## Lessons Learned
+
+Unexpected user account creation is a common persistence technique used by attackers after gaining access to a system.
