@@ -1,0 +1,8 @@
+| Event ID | Detection                | MITRE Tactic         | Technique |
+| -------- | ------------------------ | -------------------- | --------- |
+| 4624     | Successful Logon         | Initial Access       | T1078     |
+| 4625     | Brute Force              | Credential Access    | T1110     |
+| 4688     | Process Creation         | Execution            | T1059     |
+| 4720     | User Created             | Persistence          | T1136     |
+| 4732     | Admin Group Modification | Privilege Escalation | T1098     |
+| 1102     | Audit Log Cleared        | Defense Evasion      | T1070.001 |
