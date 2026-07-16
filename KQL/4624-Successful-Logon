@@ -1,1 +1,67 @@
+# Event ID 4624 - Successful Logon
 
+## Description
+
+Event ID **4624** is generated whenever a user successfully logs on to a Windows system. This event helps security analysts monitor authentication activity and identify successful user logins.
+
+---
+
+## Event ID
+
+**4624**
+
+---
+
+## Purpose
+
+- Monitor successful user authentication.
+- Verify legitimate user access.
+- Detect suspicious login patterns.
+- Investigate unauthorized access attempts.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4624
+| project TimeGenerated, Computer, RenderedDescription
+| sort by TimeGenerated desc
+```
+
+---
+
+## Sample Output
+
+- Time Generated: 2026-07-16 04:42 UTC
+- Computer: SOC-WIN10-01
+- Description:
+  - An account was successfully logged on.
+  - Logon Type: 2 (Interactive)
+  - Account Name: Administrator
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Initial Access | Valid Accounts | T1078 |
+
+---
+
+## Investigation Steps
+
+1. Verify the username involved.
+2. Check the logon type.
+3. Confirm whether the login occurred during expected hours.
+4. Review the source workstation or IP address.
+5. Correlate with Event ID 4625 for previous failed logins.
+6. Investigate if the account has administrative privileges.
+
+---
+
+## Conclusion
+
+Successful logon events provide visibility into user authentication activity and help identify both normal user behavior and potential unauthorized access.
