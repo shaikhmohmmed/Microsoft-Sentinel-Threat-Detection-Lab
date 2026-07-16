@@ -1,1 +1,64 @@
+# Event ID 4720 - User Account Created
 
+## Description
+
+Event ID **4720** is generated whenever a new local user account is created on a Windows system.
+
+---
+
+## Event ID
+
+**4720**
+
+---
+
+## Purpose
+
+- Detect newly created user accounts.
+- Identify unauthorized account creation.
+- Monitor persistence techniques.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4720
+| project TimeGenerated, Computer, RenderedDescription
+| sort by TimeGenerated desc
+```
+
+---
+
+## Sample Output
+
+- Time Generated: 2026-07-16
+- Computer: SOC-WIN10-01
+- Description:
+  - A user account was created.
+  - Account Name: hacker
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Persistence | Create Account | T1136 |
+
+---
+
+## Investigation Steps
+
+1. Identify the new account.
+2. Verify who created it.
+3. Confirm whether it was authorized.
+4. Check if the account was added to privileged groups.
+5. Review subsequent login activity.
+
+---
+
+## Conclusion
+
+Unauthorized account creation is a common persistence technique used by attackers after compromising a system.
