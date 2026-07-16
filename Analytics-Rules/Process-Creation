@@ -1,1 +1,92 @@
+# Process Creation Monitoring
 
+## Objective
+
+Detect newly created processes on Windows endpoints to identify suspicious or malicious process execution.
+
+---
+
+## Overview
+
+This analytics rule monitors Windows Security Event ID **4688**, which records every new process created on the system.
+
+---
+
+## Severity
+
+Low
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | Technique ID |
+|----------|-----------|--------------|
+| Execution | Command and Scripting Interpreter | T1059 |
+
+---
+
+## Data Source
+
+- Windows Security Event Logs
+- Azure Monitor Agent
+- Azure Arc
+- Log Analytics Workspace
+
+---
+
+## Detection Logic
+
+Whenever a new process is launched, Event ID 4688 is generated. The rule records the process name, parent process, and execution details.
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4688
+| project TimeGenerated, Computer, RenderedDescription
+```
+
+---
+
+## Test Performed
+
+Opened several applications including:
+
+- Notepad
+- Command Prompt
+- Calculator
+
+Verified Event ID 4688 was generated in Log Analytics.
+
+---
+
+## Expected Alert
+
+Process Creation Monitoring
+
+---
+
+## Investigation Steps
+
+1. Review the executable path.
+2. Verify the parent process.
+3. Inspect the command line.
+4. Determine whether execution was expected.
+5. Investigate unknown executables.
+
+---
+
+## Recommended Response
+
+- Validate suspicious executables.
+- Scan unknown files.
+- Isolate compromised systems if malicious activity is confirmed.
+
+---
+
+## Lessons Learned
+
+Monitoring process creation provides visibility into application execution and is essential for detecting malware, scripts, and attacker tools.
