@@ -1,1 +1,63 @@
+# Threat Hunt: Failed Windows Logon (Event ID 4625)
 
+## Hunt Objective
+
+Identify repeated failed authentication attempts that may indicate password guessing or brute-force attacks.
+
+---
+
+## Threat Hypothesis
+
+An attacker is attempting to gain access by repeatedly trying different passwords.
+
+---
+
+## Data Source
+
+- Microsoft Sentinel
+- Windows Security Logs
+- Azure Monitor Agent
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4625
+| summarize FailedAttempts=count() by Computer, bin(TimeGenerated,5m)
+| where FailedAttempts >= 5
+```
+
+---
+
+## Investigation Steps
+
+1. Identify the targeted account.
+2. Count failed authentication attempts.
+3. Review failure reason.
+4. Identify source IP or workstation.
+5. Check whether a successful login followed.
+6. Review account lockout events.
+
+---
+
+## Expected Findings
+
+- Multiple failed logons
+- Invalid password attempts
+- Brute-force indicators
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Credential Access | Brute Force | T1110 |
+
+---
+
+## Conclusion
+
+Repeated failed logins should be investigated immediately as they often indicate password attacks.
