@@ -1,1 +1,65 @@
+# Threat Hunt: Successful Windows Logon (Event ID 4624)
 
+## Hunt Objective
+
+Identify successful logon events to establish normal authentication behavior and detect suspicious access.
+
+---
+
+## Threat Hypothesis
+
+An attacker may have successfully authenticated using stolen or valid credentials.
+
+---
+
+## Data Source
+
+- Microsoft Sentinel
+- Windows Security Event Logs
+- Azure Monitor Agent
+- Log Analytics Workspace
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4624
+| project TimeGenerated, Computer, RenderedDescription
+| sort by TimeGenerated desc
+```
+
+---
+
+## Investigation Steps
+
+1. Review the username.
+2. Check the logon type.
+3. Verify the source workstation or IP address.
+4. Determine whether the login occurred during expected business hours.
+5. Check if multiple failed logins (4625) occurred before the successful login.
+6. Review privilege level of the account.
+
+---
+
+## Expected Findings
+
+- Legitimate user authentication
+- Interactive or remote logon
+- Authentication source
+- Account details
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Initial Access | Valid Accounts | T1078 |
+
+---
+
+## Conclusion
+
+Successful logon events help establish a baseline of user activity and can reveal unauthorized access when correlated with other security events.
