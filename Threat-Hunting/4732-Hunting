@@ -1,1 +1,60 @@
+# Threat Hunt: User Added to Administrators Group (Event ID 4732)
 
+## Hunt Objective
+
+Identify unauthorized privilege escalation through local group modifications.
+
+---
+
+## Threat Hypothesis
+
+An attacker added an account to the Administrators group to gain elevated privileges.
+
+---
+
+## Data Source
+
+- Windows Security Logs
+- Microsoft Sentinel
+
+---
+
+## KQL Query
+
+```kql
+Event
+| where EventID == 4732
+| project TimeGenerated, Computer, RenderedDescription
+```
+
+---
+
+## Investigation Steps
+
+1. Identify the modified group.
+2. Determine which account was added.
+3. Identify who performed the action.
+4. Verify approval for the change.
+5. Review additional privilege escalation events.
+
+---
+
+## Expected Findings
+
+- Administrator group changes
+- Privileged account creation
+- Unauthorized privilege escalation
+
+---
+
+## MITRE ATT&CK
+
+| Tactic | Technique | ID |
+|---------|-----------|----|
+| Privilege Escalation | Account Manipulation | T1098 |
+
+---
+
+## Conclusion
+
+Unexpected administrator group modifications are high-priority security events requiring immediate investigation.
